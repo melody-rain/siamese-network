@@ -26,15 +26,15 @@ class Siamese(nn.Module):
         # print self.cnn1 is self.cnn2
 
     def forward(self, input1, input2):
-        input1 = self.cnn1(input1)
-        input1 = input1.view(input1.size()[0], -1)
-        input1 = self.fc1(input1)
+        output1 = self.cnn1(input1)
+        output1 = output1.view(output1.size()[0], -1)
+        output1 = self.fc1(output1)
 
-        input2 = self.cnn1(input2)
-        input2 = input2.view(input2.size()[0], -1)
-        input2 = self.fc1(input2)
+        output2 = self.cnn1(input2)
+        output2 = output2.view(output2.size()[0], -1)
+        output2 = self.fc1(output2)
 
-        output = torch.sqrt(torch.sum((input1 - input2) * (input1 - input2), 1))
-        return output
+        output = torch.sqrt(torch.sum((output1 - output2) * (output1 - output2), 1))
+        return output1, output2, output
 
 

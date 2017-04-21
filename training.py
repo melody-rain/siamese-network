@@ -11,7 +11,7 @@ def train_model(model, criterion, train_loader, test_loader, g_config, use_cuda=
         model.train()
         input1, input2 = input_batch
         sim = target
-        output = model(input1, input2)
+        output0, output1, output = model(input1, input2)
 
         loss = criterion(output, sim)
         optimizer.zero_grad()
@@ -35,7 +35,7 @@ def train_model(model, criterion, train_loader, test_loader, g_config, use_cuda=
         model.eval()
         input1, input2 = input_batch
         sim = target
-        output = model(input1, input2)
+        output0, outpu1, output = model(input1, input2)
         print torch.cat((output, target), 1)
         loss = criterion(output, sim)
         loss = loss / input1.size()[0]

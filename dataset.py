@@ -11,13 +11,12 @@ class SiameseDataset(datasets.MNIST):
 
     def __getitem__(self, index):
         random_index = torch.LongTensor(2).random_(0, len(self) - 1)
-
         if self.train:
             img0, target0 = self.train_data[random_index[0]], self.train_labels[random_index[0]]
             img1, target1 = self.train_data[random_index[1]], self.train_labels[random_index[1]]
         else:
             img0, target0 = self.test_data[random_index[0]], self.test_labels[random_index[0]]
-            img1, target1 = self.test_data[random_index[0]], self.test_labels[random_index[1]]
+            img1, target1 = self.test_data[random_index[1]], self.test_labels[random_index[1]]
 
         # doing this so that it is consistent with all other datasets
         # to return a PIL Image
