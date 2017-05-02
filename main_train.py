@@ -8,6 +8,8 @@ from torch import nn
 from dataset import SiameseDataset
 from utilities import setupLogger, logging
 import os
+import traceback, sys
+import random
 
 parser = argparse.ArgumentParser(description='CRNN')
 parser.add_argument('--model-dir', type=str, dest='model_dir',
@@ -37,6 +39,11 @@ test_loader = torch.utils.data.DataLoader(
                        transforms.Normalize((0.1307,), (0.3081,))
                    ])),
     batch_size=100, shuffle=True, **kwargs)
+
+manualSeed = 9302#random.randint(1, 10000) # fix seed
+print("Random Seed: ", manualSeed)
+random.seed(manualSeed)
+torch.manual_seed(manualSeed)
 
 g_config = get_config()
 

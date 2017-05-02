@@ -33,8 +33,9 @@ class Siamese(nn.Module):
         output2 = self.cnn1(input2)
         output2 = output2.view(output2.size()[0], -1)
         output2 = self.fc1(output2)
-
+        # print output1 - output2
         output = torch.sqrt(torch.sum((output1 - output2) * (output1 - output2), 1))
+
         return output1, output2, output
 
 
